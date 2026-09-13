@@ -650,15 +650,14 @@
     let datosActuales = { ...DEFAULT_DATA };
     let passwordAutenticada = "";
 
-    // Convertidor automático si pegan un enlace de página de Unsplash en vez del archivo directo
     function formatearUrlImagen(url, fallback) {
       if (!url || typeof url !== "string" || url.trim() === "") return fallback;
       url = url.trim();
       if (url.includes("unsplash.com/es/fotos/") || url.includes("unsplash.com/photos/")) {
-        const parts = url.split("/");
-        const idPart = parts[parts.length - 1].split("?")[0].split("-").pop();
-        if (idPart) {
-          return `https://images.unsplash.com/photo-${idPart}?auto=format&fit=crop&w=1000&q=80`;
+        const clean = url.split("?")[0].replace(/\/$/, "");
+        const id = clean.split("-").pop();
+        if (id) {
+          return "https://images.unsplash.com/photo-" + id + "?auto=format&fit=crop&w=1000&q=80";
         }
       }
       return url;
