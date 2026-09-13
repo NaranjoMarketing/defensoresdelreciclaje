@@ -1,832 +1,146 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Defensores del Reciclaje | Campaña Digital Educativa</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              green: '#116E44',
-              lightgreen: '#2E7D32',
-              dark: '#201E1E',
-              accent: '#E8F5E9'
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    .bag-card { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease; }
-    .bag-card:hover { transform: translateY(-6px); }
-    .img-zoom { transition: transform 0.5s ease; }
-    .img-card:hover .img-zoom { transform: scale(1.05); }
+<head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Defensores del Reciclaje | Campaña Digital Educativa</title> <!-- Tailwind CSS CDN --> <script src="https://cdn.tailwindcss.com"></script> <!-- Lucide Icons CDN --> <script src="https://unpkg.com/lucide@latest"></script> <script> tailwind.config = { theme: { extend: { colors: { brand: { green: '#116E44', lightgreen: '#2E7D32', dark: '#201E1E', accent: '#E8F5E9' } } } } } </script> <style> .bag-card { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease; } .bag-card:hover { transform: translateY(-6px); } .img-zoom { transition: transform 0.5s ease; } .img-card:hover .img-zoom { transform: scale(1.05); } 
+    /* MEJORA UX - Defensores */
+    .lsce-card { transition: all 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .lsce-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(17,110,68,0.14); }
+    .badge-step { backdrop-filter: blur(8px); }
+    .hero-badge { animation: fadeIn 0.8s ease; }
+    @keyframes fadeIn { from {opacity:0; transform: translateY(10px)} to {opacity:1; transform:translateY(0)} }
+    .bag-card { border-radius: 20px !important; }
+    /* Limpieza tipográfica */
+    h1, h2 { text-wrap: balance; }
+
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-brand-green selection:text-white">
-
-  <!-- NAVEGACIÓN -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-      <a href="#inicio" class="flex items-center gap-3 group">
-        <div class="w-11 h-11 bg-brand-green rounded-xl flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
-          <i data-lucide="recycle" class="w-6 h-6 stroke-[2.5]"></i>
-        </div>
-        <div>
-          <span class="block font-black text-lg tracking-tight leading-none text-brand-dark">DEFENSORES</span>
-          <span class="inline-block bg-brand-green text-white text-[10px] font-bold px-1.5 py-0.5 rounded tracking-widest mt-0.5">DEL RECICLAJE</span>
-        </div>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-600">
-        <a href="#inicio" class="hover:text-brand-green transition-colors">Inicio</a>
-        <a href="#propuesta" class="hover:text-brand-green transition-colors">Propuesta</a>
-        <a href="#semaforo" class="hover:text-brand-green transition-colors">Código de Colores</a>
-        <a href="#metodo" class="hover:text-brand-green transition-colors">Método L.S.C.E.</a>
-        <a href="#galeria" class="hover:text-brand-green transition-colors">Galería</a>
-        <a href="#infografia" class="hover:text-brand-green transition-colors">Infografía</a>
-        <a href="#video" class="hover:text-brand-green transition-colors">Video</a>
-        <a href="#equipo" class="hover:text-brand-green transition-colors">Equipo</a>
-        <button onclick="abrirAdminModal()" class="flex items-center gap-1.5 bg-gray-100 hover:bg-brand-green hover:text-white text-gray-700 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border border-gray-200">
-          <i data-lucide="lock" class="w-3.5 h-3.5"></i> Administrar
-        </button>
-      </nav>
-
-      <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600 hover:text-brand-green">
-        <i data-lucide="menu" class="w-6 h-6"></i>
-      </button>
-    </div>
-
-    <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 py-4 space-y-2 text-sm font-semibold">
-      <a href="#inicio" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Inicio</a>
-      <a href="#propuesta" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Propuesta</a>
-      <a href="#semaforo" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Código de Colores</a>
-      <a href="#metodo" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Método L.S.C.E.</a>
-      <a href="#galeria" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Galería</a>
-      <a href="#infografia" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Infografía</a>
-      <a href="#video" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Video</a>
-      <a href="#equipo" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Equipo</a>
-      <button onclick="toggleMobileMenu(); abrirAdminModal();" class="w-full text-left py-2 text-xs font-bold text-brand-green flex items-center gap-2">
-        <i data-lucide="lock" class="w-4 h-4"></i> Panel Administrador
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <!-- HERO SECTION -->
-    <section id="inicio" class="relative min-h-[580px] md:min-h-[640px] flex items-center justify-center text-white overflow-hidden">
-      <img id="dyn-hero-bg" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1920&q=80" alt="Reciclaje Consciente" class="absolute inset-0 w-full h-full object-cover object-center" />
-      <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-[#116E44]/75"></div>
-
-      <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-20 text-center">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 backdrop-blur-md text-emerald-300 border border-white/20 mb-6">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span id="sync-status">Sincronizado con Google Sheets</span> • Res. 2184 de 2019[cite: 1, 2, 3]
-        </div>
-
-        <h1 id="dyn-titulo" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight drop-shadow-md">
-          Hogares Conscientes: Separar para Transformar[cite: 1, 3]
-        </h1>
-
-        <p id="dyn-eslogan" class="mt-4 text-xl sm:text-2xl md:text-3xl text-emerald-300 font-bold italic drop-shadow">
-          "Limpio, seco y separado: el reciclaje empieza en casa."[cite: 1, 2, 3]
-        </p>
-
-        <p id="dyn-descripcion" class="mt-6 text-sm sm:text-base md:text-lg text-gray-200 max-w-3xl mx-auto leading-relaxed drop-shadow">
-          Más del 78% de los residuos generados en Colombia terminan sepultados en rellenos sanitarios[cite: 1, 2, 3]. Nuestra campaña promueve la cultura de separación limpia en la cocina para dignificar la labor de los recicladores de oficio y avanzar hacia una economía circular real[cite: 1, 2, 3].
-        </p>
-
-        <div class="mt-8 flex flex-wrap justify-center gap-4">
-          <a href="#semaforo" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg transition-all hover:scale-105 text-sm">
-            <i data-lucide="layers" class="w-4 h-4"></i> El Semáforo de Bolsas
-          </a>
-          <a href="#galeria" class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-md text-white border border-white/30 font-bold px-7 py-3.5 rounded-xl transition-all hover:scale-105 text-sm">
-            <i data-lucide="camera" class="w-4 h-4"></i> Ver Fotografías
-          </a>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto mt-12 text-left">
-          <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15 shadow flex items-center gap-4">
-            <div class="p-3 bg-red-500/20 text-red-300 rounded-xl font-black text-2xl border border-red-400/30">78%</div>
-            <div>
-              <p class="font-bold text-white text-sm">Residuos Enterrados</p>
-              <p class="text-xs text-gray-300">Terminan colapsando rellenos como Doña Juana[cite: 1, 2, 3].</p>
-            </div>
-          </div>
-          <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15 shadow flex items-center gap-4">
-            <div class="p-3 bg-emerald-500/20 text-emerald-300 rounded-xl font-black text-2xl border border-emerald-400/30">17%</div>
-            <div>
-              <p class="font-bold text-white text-sm">Aprovechamiento Nacional</p>
-              <p class="text-xs text-gray-300">Apenas se recupera por llegar sucio o contaminado[cite: 1, 2, 3].</p>
-            </div>
-          </div>
-        </div>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-brand-green selection:text-white"> <!-- NAVEGACIÓN --> <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm"> <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between"> <a href="#inicio" class="flex items-center gap-3 group"> <div class="w-11 h-11 bg-brand-green rounded-xl flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform"> <i data-lucide="recycle" class="w-6 h-6 stroke-[2.5]"></i> </div> <div> <span class="block font-black text-lg tracking-tight leading-none text-brand-dark">DEFENSORES</span> <span class="inline-block bg-brand-green text-white text-[10px] font-bold px-1.5 py-0.5 rounded tracking-widest mt-0.5">DEL RECICLAJE</span> </div> </a> <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-600"> <a href="#inicio" class="hover:text-brand-green transition-colors">Inicio</a> <a href="#propuesta" class="hover:text-brand-green transition-colors">Propuesta</a> <a href="#semaforo" class="hover:text-brand-green transition-colors">Código de Colores</a> <a href="#metodo" class="hover:text-brand-green transition-colors">Método L.S.C.E.</a> <a href="#galeria" class="hover:text-brand-green transition-colors">Galería</a> <a href="#infografia" class="hover:text-brand-green transition-colors">Infografía</a> <a href="#video" class="hover:text-brand-green transition-colors">Video</a> <a href="#equipo" class="hover:text-brand-green transition-colors">Equipo</a> <button onclick="abrirAdminModal()" class="flex items-center gap-1.5 bg-gray-100 hover:bg-brand-green hover:text-white text-gray-700 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border border-gray-200"> <i data-lucide="lock" class="w-3.5 h-3.5"></i> Administrar </button> </nav> <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600 hover:text-brand-green"> <i data-lucide="menu" class="w-6 h-6"></i> </button> </div> <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 py-4 space-y-2 text-sm font-semibold"> <a href="#inicio" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Inicio</a> <a href="#propuesta" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Propuesta</a> <a href="#semaforo" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Código de Colores</a> <a href="#metodo" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Método L.S.C.E.</a> <a href="#galeria" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Galería</a> <a href="#infografia" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Infografía</a> <a href="#video" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Video</a> <a href="#equipo" onclick="toggleMobileMenu()" class="block py-1.5 text-gray-700">Equipo</a> <button onclick="toggleMobileMenu(); abrirAdminModal();" class="w-full text-left py-2 text-xs font-bold text-brand-green flex items-center gap-2"> <i data-lucide="lock" class="w-4 h-4"></i> Panel Administrador </button> </div> </header> <main> <!-- HERO SECTION --> <section id="inicio" class="relative min-h-[580px] md:min-h-[640px] flex items-center justify-center text-white overflow-hidden"> <img id="dyn-hero-bg" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1920&q=80" alt="Reciclaje Consciente" class="absolute inset-0 w-full h-full object-cover object-center" /> <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-[#116E44]/75"></div> <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-20 text-center"> <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 backdrop-blur-md text-emerald-300 border border-white/20 mb-6"> <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <span id="sync-status">Sincronizado con Google Sheets</span> • Res. 2184 de 2019 </div> <h1 id="dyn-titulo" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight drop-shadow-md"> Hogares Conscientes: Separar para Transformar </h1> <p id="dyn-eslogan" class="mt-4 text-xl sm:text-2xl md:text-3xl text-emerald-300 font-bold italic drop-shadow"> "Limpio, seco y separado: el reciclaje empieza en casa." </p> <p id="dyn-descripcion" class="mt-6 text-sm sm:text-base md:text-lg text-gray-200 max-w-3xl mx-auto leading-relaxed drop-shadow"> Más del 78% de los residuos generados en Colombia terminan sepultados en rellenos sanitarios. Nuestra campaña promueve la cultura de separación limpia en la cocina para dignificar la labor de los recicladores de oficio y avanzar hacia una economía circular real. </p> <div class="mt-8 flex flex-wrap justify-center gap-4"> <a href="#semaforo" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg transition-all hover:scale-105 text-sm"> <i data-lucide="layers" class="w-4 h-4"></i> El Semáforo de Bolsas </a> <a href="#galeria" class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-md text-white border border-white/30 font-bold px-7 py-3.5 rounded-xl transition-all hover:scale-105 text-sm"> <i data-lucide="camera" class="w-4 h-4"></i> Ver Fotografías </a> </div> <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto mt-12 text-left"> <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15 shadow flex items-center gap-4"> <div class="p-3 bg-red-500/20 text-red-300 rounded-xl font-black text-2xl border border-red-400/30">78%</div> <div> <p class="font-bold text-white text-sm">Residuos Enterrados</p> <p class="text-xs text-gray-300">Terminan colapsando rellenos como Doña Juana.</p> </div> </div> <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15 shadow flex items-center gap-4"> <div class="p-3 bg-emerald-500/20 text-emerald-300 rounded-xl font-black text-2xl border border-emerald-400/30">17%</div> <div> <p class="font-bold text-white text-sm">Aprovechamiento Nacional</p> <p class="text-xs text-gray-300">Apenas se recupera por llegar sucio o contaminado.</p> </div> </div> </div> </div> </section> <!-- PROPUESTA --> <section id="propuesta" class="py-16 max-w-6xl mx-auto px-4 sm:px-6"> <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"> <div> <span class="text-brand-green font-bold text-xs uppercase tracking-widest flex items-center gap-2 mb-2"> <i data-lucide="compass" class="w-4 h-4"></i> Marco Institucional </span> <h2 class="text-3xl font-black text-brand-dark tracking-tight leading-tight mb-4"> Transformar la Cocina en el Primer Eslabón Ecológico </h2> <p class="text-sm text-gray-600 leading-relaxed mb-4"> La separación en la fuente no requiere costosos contenedores industriales, sino una conducta colectiva clara. A través de pedagogía digital directa, guiamos a familias y estudiantes en la adopción del código de colores estandarizado por el Ministerio de Ambiente. </p> <div class="p-4 bg-brand-accent rounded-2xl border border-emerald-200"> <h4 class="font-bold text-brand-green text-sm flex items-center gap-2 mb-1"> <i data-lucide="heart-handshake" class="w-4 h-4"></i> Dignificación del Reciclador </h4> <p class="text-xs text-emerald-900 leading-relaxed"> Un empaque con grasa es un residuo inutilizable; un empaque limpio y seco es salario directo para las familias recicladoras de base de Colombia. </p> </div> </div> <div class="relative rounded-3xl overflow-hidden shadow-xl border border-gray-200 aspect-[4/3] group"> <img id="dyn-propuesta-img" src="https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=1000&q=80" alt="Separación en la fuente" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /> <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-6"> <p class="text-white text-xs font-semibold"> El hábito diario de separar evita que toneladas de recursos reciclables se contaminen en el camión recolector. </p> </div> </div> </div> </section> <!-- CÓDIGO DE COLORES --> <section id="semaforo" class="py-16 bg-gray-100/70 border-y border-gray-200"> <div class="max-w-6xl mx-auto px-4 sm:px-6"> <div class="text-center max-w-xl mx-auto mb-12"> <span class="text-brand-green font-bold text-xs uppercase tracking-widest">Resolución 2184 de 2019</span> <h2 class="text-3xl font-black text-brand-dark tracking-tight mt-1">El Semáforo de Bolsas en Casa</h2> <p class="text-gray-600 text-sm mt-2">La norma nacional unificada para clasificar sin cometer errores.</p> </div> <div class="grid grid-cols-1 md:grid-cols-3 gap-6"> <div class="bag-card bg-white rounded-3xl p-6 border-2 border-gray-300 shadow-sm flex flex-col justify-between"> <div> <div class="flex items-center justify-between mb-3"> <span class="inline-block px-3 py-1 rounded-full text-xs font-black uppercase bg-gray-100 text-gray-800 border border-gray-300"> Bolsa Blanca </span> <i data-lucide="package-check" class="w-6 h-6 text-gray-700"></i> </div> <h3 class="text-xl font-black text-gray-900">Aprovechables Limpios</h3> <p class="text-xs text-brand-green font-bold mt-1">Sustento del reciclador de oficio</p> <ul class="mt-4 space-y-2 text-xs text-gray-600"> <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Botellas de plástico (PET) y galones</li> <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Cajas de cartón y cubetas de huevo secas</li> <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Latas de hojalata, atún y gaseosa</li> <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Botellas y frascos de vidrio (enteros)</li> <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Periódicos y hojas de cuaderno</li> </ul> </div> <div class="mt-6 pt-3 border-t border-gray-100 text-[11px] font-bold text-gray-600 bg-gray-50 -mx-6 -mb-6 p-3.5 rounded-b-3xl"> ⚠️ Condición obligatoria: Limpios, secos y aplastados. Cero grasa. </div> </div> <div class="bag-card bg-zinc-900 text-white rounded-3xl p-6 shadow-md flex flex-col justify-between border-2 border-zinc-800"> <div> <div class="flex items-center justify-between mb-3"> <span class="inline-block px-3 py-1 rounded-full text-xs font-black uppercase bg-zinc-800 text-zinc-200 border border-zinc-700"> Bolsa Negra </span> <i data-lucide="trash-2" class="w-6 h-6 text-zinc-400"></i> </div> <h3 class="text-xl font-black text-white">No Aprovechables</h3> <p class="text-xs text-zinc-400 font-bold mt-1">Basura ordinaria / Relleno sanitario</p> <ul class="mt-4 space-y-2 text-xs text-zinc-300"> <li class="flex items-center gap-2"><i data-lucide="x" class="w-3.5 h-3.5 text-red-400 shrink-0"></i> Papel higiénico y pañitos húmedos</li> <li class="flex items-center gap-2"><i data-lucide="x" class="w-3.5 h-3.5 text-red-400 shrink-0"></i> Servilletas usadas y toallas de cocina</li> <li class="flex items-center gap-2"><i data-lucide="x" class="w-3.5 h-3.5 text-red-400 shrink-0"></i> Paquetes de papas/mecato (metalizados)</li> <li class="flex items-center gap-2"><i data-lucide="x" class="w-3.5 h-3.5 text-red-400 shrink-0"></i> Tapabocas y residuos de barrido</li> </ul> </div> <div class="mt-6 pt-3 border-t border-zinc-800 text-[11px] font-semibold text-zinc-400 bg-zinc-950 -mx-6 -mb-6 p-3.5 rounded-b-3xl"> 🚫 Jamás depositar materiales limpios aquí; no se pueden rescatar. </div> </div> <div class="bag-card bg-emerald-800 text-white rounded-3xl p-6 shadow-md flex flex-col justify-between border-2 border-emerald-700"> <div> <div class="flex items-center justify-between mb-3"> <span class="inline-block px-3 py-1 rounded-full text-xs font-black uppercase bg-emerald-900 text-emerald-100 border border-emerald-700"> Bolsa Verde </span> <i data-lucide="sprout" class="w-6 h-6 text-emerald-200"></i> </div> <h3 class="text-xl font-black text-white">Orgánicos Compostables</h3> <p class="text-xs text-emerald-200 font-bold mt-1">Bio-residuos que nutren la tierra</p> <ul class="mt-4 space-y-2 text-xs text-emerald-100"> <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-300 shrink-0"></i> Cáscaras de plátano, frutas y vegetales</li> <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-300 shrink-0"></i> Restos de poda de jardín y flores secas</li> <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-300 shrink-0"></i> Borra o concho de café y bolsitas de té</li> <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-300 shrink-0"></i> Cáscaras de huevo limpias</li> </ul> </div> <div class="mt-6 pt-3 border-t border-emerald-700 text-[11px] font-semibold text-emerald-200 bg-emerald-950 -mx-6 -mb-6 p-3.5 rounded-b-3xl"> 🌱 Ideales para huertas caseras, abonos orgánicos y compostaje. </div> </div> </div> </div> </section> <!-- MÉTODO L.S.C.E. --> 
+<!-- PROTOCOLO DE ORO EN 4 PASOS - VERSIÓN MEJORADA UX -->
+<section id="metodo" class="py-20 bg-white relative overflow-hidden">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-50 rounded-full blur-3xl -z-10 opacity-60"></div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-black tracking-[0.18em] uppercase">
+        <span class="w-1.5 h-1.5 bg-emerald-600 rounded-full animate-pulse"></span>
+        Protocolo de oro en 4 pasos
       </div>
-    </section>
+      <h2 class="mt-4 text-3xl sm:text-4xl md:text-[42px] font-black tracking-tight text-gray-900 leading-[1.1]">
+        El Método <span class="text-emerald-700">L.S.C.E.</span>
+      </h2>
+      <p class="mt-3 text-[15px] sm:text-base text-gray-500 leading-relaxed">
+        La secuencia práctica que evita la contaminación de materiales en la cocina y multiplica el valor del reciclaje.
+      </p>
+    </div>
 
-    <!-- PROPUESTA -->
-    <section id="propuesta" class="py-16 max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div>
-          <span class="text-brand-green font-bold text-xs uppercase tracking-widest flex items-center gap-2 mb-2">
-            <i data-lucide="compass" class="w-4 h-4"></i> Marco Institucional
+    <!-- Stepper line (desktop) -->
+    <div class="hidden lg:block relative mt-12">
+      <div class="absolute top-[56px] left-[12%] right-[12%] h-[2px] bg-gradient-to-r from-emerald-200 via-emerald-300 to-emerald-200"></div>
+      <div class="absolute top-[52px] left-[12%] w-2 h-2 bg-emerald-400 rounded-full"></div>
+      <div class="absolute top-[52px] right-[12%] w-2 h-2 bg-emerald-400 rounded-full"></div>
+    </div>
+
+    <!-- Cards -->
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5">
+      <!-- 1 Lavar -->
+      <article class="group relative bg-white rounded-[20px] border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.04)] overflow-hidden hover:shadow-[0_20px_40px_rgba(17,110,68,0.12)] hover:-translate-y-1.5 transition-all duration-300">
+        <div class="absolute top-3 left-3 z-10 flex items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 bg-gray-900 text-white text-[11px] font-black px-3 py-1 rounded-full shadow-md">
+            <span class="w-4 h-4 bg-white/20 rounded-full flex items-center justify-center text-[10px]">1</span> Lavar
           </span>
-          <h2 class="text-3xl font-black text-brand-dark tracking-tight leading-tight mb-4">
-            Transformar la Cocina en el Primer Eslabón Ecológico[cite: 1, 2, 3]
-          </h2>
-          <p class="text-sm text-gray-600 leading-relaxed mb-4">
-            La separación en la fuente no requiere costosos contenedores industriales, sino una conducta colectiva clara[cite: 1, 2]. A través de pedagogía digital directa, guiamos a familias y estudiantes en la adopción del código de colores estandarizado por el Ministerio de Ambiente[cite: 1, 2, 3].
-          </p>
-          <div class="p-4 bg-brand-accent rounded-2xl border border-emerald-200">
-            <h4 class="font-bold text-brand-green text-sm flex items-center gap-2 mb-1">
-              <i data-lucide="heart-handshake" class="w-4 h-4"></i> Dignificación del Reciclador
-            </h4>
-            <p class="text-xs text-emerald-900 leading-relaxed">
-              Un empaque con grasa es un residuo inutilizable; un empaque limpio y seco es salario directo para las familias recicladoras de base de Colombia[cite: 1, 2, 3].
-            </p>
+        </div>
+        <div class="relative h-[200px] overflow-hidden bg-gray-100">
+          <img id="dyn-metodo-lavar" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Lavar envases" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="font-black text-[15px] text-gray-900 leading-tight">Enjuague Rápido</h3>
+            <i data-lucide="droplets" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+          </div>
+          <p class="mt-2 text-[13px] leading-[1.5] text-gray-500">Retira restos de lácteos, salsas o grasa usando un chorrito de agua residual de la loza. No necesitas jabón.</p>
+          <div class="mt-4 flex items-center gap-2 text-[11px] font-bold text-emerald-700">
+            <span class="w-6 h-[2px] bg-emerald-200"></span> 5 segundos basta
           </div>
         </div>
+      </article>
 
-        <div class="relative rounded-3xl overflow-hidden shadow-xl border border-gray-200 aspect-[4/3] group">
-          <img id="dyn-propuesta-img" src="https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=1000&q=80" alt="Separación en la fuente" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-6">
-            <p class="text-white text-xs font-semibold">
-              El hábito diario de separar evita que toneladas de recursos reciclables se contaminen en el camión recolector[cite: 1, 2, 3].
-            </p>
+      <!-- 2 Secar -->
+      <article class="group relative bg-white rounded-[20px] border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.04)] overflow-hidden hover:shadow-[0_20px_40px_rgba(17,110,68,0.12)] hover:-translate-y-1.5 transition-all duration-300">
+        <div class="absolute top-3 left-3 z-10">
+          <span class="inline-flex items-center gap-1.5 bg-emerald-700 text-white text-[11px] font-black px-3 py-1 rounded-full shadow-md">
+            <span class="w-4 h-4 bg-white/20 rounded-full flex items-center justify-center text-[10px]">2</span> Secar
+          </span>
+        </div>
+        <div class="relative h-[200px] overflow-hidden bg-gray-100">
+          <img id="dyn-metodo-secar" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80" alt="Secar envases" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="font-black text-[15px] text-gray-900 leading-tight">Escurrir al Aire</h3>
+            <i data-lucide="wind" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+          </div>
+          <p class="mt-2 text-[13px] leading-[1.5] text-gray-500">Deja escurrir los envases. La humedad deteriora y pudre el papel o cartón que está junto a ellos.</p>
+          <div class="mt-4 flex items-center gap-2 text-[11px] font-bold text-emerald-700">
+            <span class="w-6 h-[2px] bg-emerald-200"></span> Evita malos olores
           </div>
         </div>
-      </div>
-    </section>
+      </article>
 
-    <!-- CÓDIGO DE COLORES -->
-    <section id="semaforo" class="py-16 bg-gray-100/70 border-y border-gray-200">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="text-center max-w-xl mx-auto mb-12">
-          <span class="text-brand-green font-bold text-xs uppercase tracking-widest">Resolución 2184 de 2019</span>
-          <h2 class="text-3xl font-black text-brand-dark tracking-tight mt-1">El Semáforo de Bolsas en Casa[cite: 1, 2, 3]</h2>
-          <p class="text-gray-600 text-sm mt-2">La norma nacional unificada para clasificar sin cometer errores[cite: 1, 2, 3].</p>
+      <!-- 3 Compactar -->
+      <article class="group relative bg-white rounded-[20px] border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.04)] overflow-hidden hover:shadow-[0_20px_40px_rgba(17,110,68,0.12)] hover:-translate-y-1.5 transition-all duration-300">
+        <div class="absolute top-3 left-3 z-10">
+          <span class="inline-flex items-center gap-1.5 bg-gray-900 text-white text-[11px] font-black px-3 py-1 rounded-full shadow-md">
+            <span class="w-4 h-4 bg-white/20 rounded-full flex items-center justify-center text-[10px]">3</span> Compactar
+          </span>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bag-card bg-white rounded-3xl p-6 border-2 border-gray-300 shadow-sm flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="inline-block px-3 py-1 rounded-full text-xs font-black uppercase bg-gray-100 text-gray-800 border border-gray-300">
-                  Bolsa Blanca
-                </span>
-                <i data-lucide="package-check" class="w-6 h-6 text-gray-700"></i>
-              </div>
-              <h3 class="text-xl font-black text-gray-900">Aprovechables Limpios[cite: 1, 2, 3]</h3>
-              <p class="text-xs text-brand-green font-bold mt-1">Sustento del reciclador de oficio[cite: 1, 2, 3]</p>
-              <ul class="mt-4 space-y-2 text-xs text-gray-600">
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Botellas de plástico (PET) y galones[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Cajas de cartón y cubetas de huevo secas[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Latas de hojalata, atún y gaseosa[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Botellas y frascos de vidrio (enteros)[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green shrink-0"></i> Periódicos y hojas de cuaderno[cite: 1, 2, 3]</li>
-              </ul>
-            </div>
-            <div class="mt-6 pt-3 border-t border-gray-100 text-[11px] font-bold text-gray-600 bg-gray-50 -mx-6 -mb-6 p-3.5 rounded-b-3xl">
-              ⚠️ Condición obligatoria: Limpios, secos y aplastados. Cero grasa[cite: 1, 2, 3].
-            </div>
+        <div class="relative h-[200px] overflow-hidden bg-orange-400">
+          <img id="dyn-metodo-compactar" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Compactar botellas" class="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:scale-105 transition-transform duration-700" />
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="font-black text-[15px] text-gray-900 leading-tight">Reducir Volumen</h3>
+            <i data-lucide="minimize-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
           </div>
-
-          <div class="bag-card bg-zinc-900 text-white rounded-3xl p-6 shadow-md flex flex-col justify-between border-2 border-zinc-800">
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="inline-block px-3 py-1 rounded-full text-xs font-black uppercase bg-zinc-800 text-zinc-200 border border-zinc-700">
-                  Bolsa Negra
-                </span>
-                <i data-lucide="trash-2" class="w-6 h-6 text-zinc-400"></i>
-              </div>
-              <h3 class="text-xl font-black text-white">No Aprovechables[cite: 1, 2, 3]</h3>
-              <p class="text-xs text-zinc-400 font-bold mt-1">Basura ordinaria / Relleno sanitario[cite: 1, 2, 3]</p>
-              <ul class="mt-4 space-y-2 text-xs text-zinc-300">
-                <li class="flex items-center gap-2"><i data-lucide="x" class="w-3.5 h-3.5 text-red-400 shrink-0"></i> Papel higiénico y pañitos húmedos[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="x" class="w-3.5 h-3.5 text-red-400 shrink-0"></i> Servilletas usadas y toallas de cocina[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="x" class="w-3.5 h-3.5 text-red-400 shrink-0"></i> Paquetes de papas/mecato (metalizados)[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="x" class="w-3.5 h-3.5 text-red-400 shrink-0"></i> Tapabocas y residuos de barrido[cite: 1, 2, 3]</li>
-              </ul>
-            </div>
-            <div class="mt-6 pt-3 border-t border-zinc-800 text-[11px] font-semibold text-zinc-400 bg-zinc-950 -mx-6 -mb-6 p-3.5 rounded-b-3xl">
-              🚫 Jamás depositar materiales limpios aquí; no se pueden rescatar[cite: 1, 2, 3].
-            </div>
-          </div>
-
-          <div class="bag-card bg-emerald-800 text-white rounded-3xl p-6 shadow-md flex flex-col justify-between border-2 border-emerald-700">
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="inline-block px-3 py-1 rounded-full text-xs font-black uppercase bg-emerald-900 text-emerald-100 border border-emerald-700">
-                  Bolsa Verde
-                </span>
-                <i data-lucide="sprout" class="w-6 h-6 text-emerald-200"></i>
-              </div>
-              <h3 class="text-xl font-black text-white">Orgánicos Compostables[cite: 1, 2, 3]</h3>
-              <p class="text-xs text-emerald-200 font-bold mt-1">Bio-residuos que nutren la tierra[cite: 1, 2, 3]</p>
-              <ul class="mt-4 space-y-2 text-xs text-emerald-100">
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-300 shrink-0"></i> Cáscaras de plátano, frutas y vegetales[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-300 shrink-0"></i> Restos de poda de jardín y flores secas[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-300 shrink-0"></i> Borra o concho de café y bolsitas de té[cite: 1, 2, 3]</li>
-                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-300 shrink-0"></i> Cáscaras de huevo limpias[cite: 1, 2, 3]</li>
-              </ul>
-            </div>
-            <div class="mt-6 pt-3 border-t border-emerald-700 text-[11px] font-semibold text-emerald-200 bg-emerald-950 -mx-6 -mb-6 p-3.5 rounded-b-3xl">
-              🌱 Ideales para huertas caseras, abonos orgánicos y compostaje[cite: 1, 2, 3].
-            </div>
+          <p class="mt-2 text-[13px] leading-[1.5] text-gray-500">Aplasta las botellas PET y pliega las cajas. Multiplicas el espacio y la carga útil del reciclador.</p>
+          <div class="mt-4 flex items-center gap-2 text-[11px] font-bold text-emerald-700">
+            <span class="w-6 h-[2px] bg-emerald-200"></span> x3 más capacidad
           </div>
         </div>
-      </div>
-    </section>
+      </article>
 
-    <!-- MÉTODO L.S.C.E. -->
-    <section id="metodo" class="py-16 max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-xl mx-auto mb-12">
-        <span class="text-brand-green font-bold text-xs uppercase tracking-widest">Protocolo de Oro en 4 Pasos</span>
-        <h2 class="text-3xl font-black text-brand-dark tracking-tight mt-1">El Método L.S.C.E.[cite: 1, 2, 3]</h2>
-        <p class="text-gray-600 text-sm mt-2">La secuencia práctica que evita la contaminación de materiales en la cocina[cite: 1, 2, 3].</p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between">
-          <div class="h-44 overflow-hidden relative bg-gray-100">
-            <img id="dyn-metodo-lavar" src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=600&q=80" alt="Enjuagar envases" class="w-full h-full object-cover" />
-            <span class="absolute top-3 left-3 bg-brand-green text-white font-black text-xs px-2.5 py-1 rounded-lg">1. Lavar</span>
+      <!-- 4 Entregar -->
+      <article class="group relative bg-white rounded-[20px] border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.04)] overflow-hidden hover:shadow-[0_20px_40px_rgba(17,110,68,0.12)] hover:-translate-y-1.5 transition-all duration-300">
+        <div class="absolute top-3 left-3 z-10">
+          <span class="inline-flex items-center gap-1.5 bg-emerald-700 text-white text-[11px] font-black px-3 py-1 rounded-full shadow-md">
+            <span class="w-4 h-4 bg-white/20 rounded-full flex items-center justify-center text-[10px]">4</span> Entregar
+          </span>
+        </div>
+        <div class="relative h-[200px] overflow-hidden bg-gray-100">
+          <img id="dyn-metodo-entregar" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80" alt="Entregar reciclaje" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="font-black text-[15px] text-gray-900 leading-tight">Entrega Solidaria</h3>
+            <i data-lucide="hand-heart" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
           </div>
-          <div class="p-5 text-center flex-1 flex flex-col justify-center">
-            <h4 class="font-bold text-gray-900 text-base mb-1">Enjuague Rápido</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Retira restos de lácteos, salsas o grasa usando un chorrito de agua residual de la loza[cite: 1, 2, 3].
-            </p>
+          <p class="mt-2 text-[13px] leading-[1.5] text-gray-500">Entrega directamente en mano a las asociaciones de recicladores en los días de ruta selectiva.</p>
+          <div class="mt-4 flex items-center gap-2 text-[11px] font-bold text-emerald-700">
+            <span class="w-6 h-[2px] bg-emerald-200"></span> Dignifica su labor
           </div>
         </div>
-
-        <div class="bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between">
-          <div class="h-44 overflow-hidden relative bg-gray-100">
-            <img id="dyn-metodo-secar" src="https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?auto=format&fit=crop&w=600&q=80" alt="Secado de recipientes" class="w-full h-full object-cover" />
-            <span class="absolute top-3 left-3 bg-brand-green text-white font-black text-xs px-2.5 py-1 rounded-lg">2. Secar</span>
-          </div>
-          <div class="p-5 text-center flex-1 flex flex-col justify-center">
-            <h4 class="font-bold text-gray-900 text-base mb-1">Escurrir al Aire</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Deja escurrir los envases. La humedad deteriora y pudre el papel o cartón que esté junto a ellos[cite: 1, 2, 3].
-            </p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between">
-          <div class="h-44 overflow-hidden relative bg-gray-100">
-            <img id="dyn-metodo-compactar" src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=600&q=80" alt="Compactar botellas" class="w-full h-full object-cover" />
-            <span class="absolute top-3 left-3 bg-brand-green text-white font-black text-xs px-2.5 py-1 rounded-lg">3. Compactar</span>
-          </div>
-          <div class="p-5 text-center flex-1 flex flex-col justify-center">
-            <h4 class="font-bold text-gray-900 text-base mb-1">Reducir Volumen</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Aplasta las botellas PET y pliega las cajas. Multiplicas el espacio de carga del reciclador[cite: 1, 2, 3].
-            </p>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between">
-          <div class="h-44 overflow-hidden relative bg-gray-100">
-            <img id="dyn-metodo-entregar" src="https://images.unsplash.com/photo-1526951521990-620dc14c214b?auto=format&fit=crop&w=600&q=80" alt="Entrega al reciclador" class="w-full h-full object-cover" />
-            <span class="absolute top-3 left-3 bg-brand-green text-white font-black text-xs px-2.5 py-1 rounded-lg">4. Entregar</span>
-          </div>
-          <div class="p-5 text-center flex-1 flex flex-col justify-center">
-            <h4 class="font-bold text-gray-900 text-base mb-1">Entrega Solidaria</h4>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Entrega directamente en mano a las asociaciones de recicladores en los días de ruta selectiva[cite: 1, 2, 3].
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-8 bg-amber-50 border-2 border-amber-300 p-5 rounded-3xl flex items-start gap-4 shadow-sm">
-        <div class="w-10 h-10 bg-amber-200 text-amber-900 rounded-2xl flex items-center justify-center shrink-0 mt-0.5">
-          <i data-lucide="shield-alert" class="w-6 h-6"></i>
-        </div>
-        <div>
-          <h4 class="font-black text-amber-900 text-sm uppercase tracking-wide">Protocolo de Seguridad: Protección al Reciclador de Oficio</h4>
-          <p class="text-xs text-amber-800 mt-1 leading-relaxed">
-            Nunca arrojes vidrios rotos, espejos o bombillos sueltos en la bolsa[cite: 1, 2, 3]. Envuélvelos en cartón grueso o insértalos dentro de una botella plástica cortada y sellada con cinta adhesiva, marcando con marcador visible: <strong>"PRECAUCIÓN: VIDRIO ROTO"</strong>[cite: 1, 2, 3]. Previene accidentes laborales e incapacidades en quienes recogen tus residuos[cite: 1, 2, 3].
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- GALERÍA DE CASOS REALES -->
-    <section id="galeria" class="py-16 bg-gray-100/80 border-t border-gray-200">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="text-center max-w-xl mx-auto mb-12">
-          <span class="text-brand-green font-bold text-xs uppercase tracking-widest">Evidencia y Rutina</span>
-          <h2 class="text-3xl font-black text-brand-dark tracking-tight mt-1">Galería de la Campaña[cite: 1, 2, 3]</h2>
-          <p class="text-gray-600 text-sm mt-2">La separación en la fuente observada desde el lente pedagógico[cite: 1, 2, 3].</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group">
-            <div class="h-48 overflow-hidden bg-gray-100">
-              <img id="dyn-galeria-1" src="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?auto=format&fit=crop&w=800&q=80" alt="Separación organizada" class="img-zoom w-full h-full object-cover" />
-            </div>
-            <div class="p-4">
-              <p class="text-xs font-bold text-gray-900">Punto Ecológico en la Cocina[cite: 3]</p>
-              <p class="text-[11px] text-gray-500 mt-0.5">Disponer bolsas diferenciadas disminuye en un 80% los errores al desechar[cite: 3].</p>
-            </div>
-          </div>
-
-          <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group">
-            <div class="h-48 overflow-hidden bg-gray-100">
-              <img id="dyn-galeria-2" src="https://images.unsplash.com/photo-1591193686104-fddba4d0e4d8?auto=format&fit=crop&w=800&q=80" alt="Reciclaje de botellas" class="img-zoom w-full h-full object-cover" />
-            </div>
-            <div class="p-4">
-              <p class="text-xs font-bold text-gray-900">Plásticos PET Clasificados[cite: 3]</p>
-              <p class="text-[11px] text-gray-500 mt-0.5">Envases limpios y secos que ingresan de inmediato a las plantas de transformación[cite: 3].</p>
-            </div>
-          </div>
-
-          <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group">
-            <div class="h-48 overflow-hidden bg-gray-100">
-              <img id="dyn-galeria-3" src="https://images.unsplash.com/photo-1537084642907-629340c7e59c?auto=format&fit=crop&w=800&q=80" alt="Reciclaje de cartón" class="img-zoom w-full h-full object-cover" />
-            </div>
-            <div class="p-4">
-              <p class="text-xs font-bold text-gray-900">Cartón y Papel Libre de Grasa[cite: 3]</p>
-              <p class="text-[11px] text-gray-500 mt-0.5">Mantenerlos libres de humedad y restos de salsas asegura su aprovechamiento[cite: 3].</p>
-            </div>
-          </div>
-
-          <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group">
-            <div class="h-48 overflow-hidden bg-gray-100">
-              <img id="dyn-galeria-4" src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=800&q=80" alt="Residuos de compost" class="img-zoom w-full h-full object-cover" />
-            </div>
-            <div class="p-4">
-              <p class="text-xs font-bold text-gray-900">Aprovechamiento Orgánico[cite: 3]</p>
-              <p class="text-[11px] text-gray-500 mt-0.5">Cáscaras de frutas y café que retornan al suelo enriqueciendo cultivos y jardines[cite: 3].</p>
-            </div>
-          </div>
-
-          <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group">
-            <div class="h-48 overflow-hidden bg-gray-100">
-              <img id="dyn-galeria-5" src="https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80" alt="Vidrio limpio" class="img-zoom w-full h-full object-cover" />
-            </div>
-            <div class="p-4">
-              <p class="text-xs font-bold text-gray-900">Frascos de Vidrio Aptos[cite: 3]</p>
-              <p class="text-[11px] text-gray-500 mt-0.5">Un material 100% reciclable de forma infinita si se entrega entero y sin roturas[cite: 3].</p>
-            </div>
-          </div>
-
-          <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group">
-            <div class="h-48 overflow-hidden bg-gray-100">
-              <img id="dyn-galeria-6" src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="Economía circular comunitaria" class="img-zoom w-full h-full object-cover" />
-            </div>
-            <div class="p-4">
-              <p class="text-xs font-bold text-gray-900">La Fuerza del Reciclador[cite: 3]</p>
-              <p class="text-[11px] text-gray-500 mt-0.5">La ruta selectiva urbana es el verdadero corazón de la economía circular del país[cite: 3].</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INFOGRAFÍA -->
-    <section id="infografia" class="py-16 max-w-5xl mx-auto px-4 sm:px-6 text-center">
-      <div class="max-w-xl mx-auto mb-10">
-        <span class="text-brand-green font-bold text-xs uppercase tracking-widest">Recurso Oficial Descargable</span>
-        <h2 class="text-3xl font-black text-brand-dark tracking-tight mt-1">Infografía de la Campaña[cite: 1, 2, 3]</h2>
-        <p class="text-gray-600 text-sm mt-2">Material vertical elaborado por el equipo con el semáforo y protocolo L.S.C.E.[cite: 1, 2, 3]</p>
-      </div>
-
-      <div class="bg-white p-4 sm:p-7 rounded-3xl border border-gray-200 shadow-md max-w-md mx-auto">
-        <img id="dyn-infografia-img" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80" alt="Infografía Tu Hogar en Modo Circular" class="w-full h-auto rounded-2xl shadow border border-gray-100 object-contain mx-auto" />
-        <div class="mt-5 flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-gray-100">
-          <span class="text-xs text-gray-500 italic font-medium">Diseñada por Rodrigo Naranjo[cite: 1, 2, 3]</span>
-          <a id="dyn-infografia-link" href="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80" target="_blank" class="inline-flex items-center gap-1.5 bg-brand-green hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm">
-            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Ver en Alta Resolución
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- VIDEO -->
-    <section id="video" class="py-16 bg-brand-dark text-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest">Sustentación del Equipo</span>
-        <h2 class="text-3xl font-black text-white tracking-tight mt-1">Video Demostrativo del Proyecto[cite: 1, 2, 3]</h2>
-        <p class="text-zinc-400 text-xs sm:text-sm mt-2 max-w-lg mx-auto">
-          Exposición académica de 3 a 10 minutos con la participación de Rodrigo Naranjo, Juan Esteban Montoya y Mariana Lucía Lozano[cite: 1, 2, 3].
-        </p>
-
-        <div class="mt-8 relative aspect-video bg-black rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl">
-          <iframe id="dyn-video-iframe" class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video de la Campaña" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- EQUIPO -->
-    <section id="equipo" class="py-16 max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-xl mx-auto mb-12">
-        <h2 class="text-3xl font-black text-brand-dark tracking-tight">Equipo Desarrollador[cite: 1, 2, 3]</h2>
-        <p class="text-gray-600 text-sm mt-1">Corporación Unificada Nacional de Educación Superior (CUN) • Ficha 54424[cite: 3]</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm text-center">
-          <div class="w-14 h-14 bg-brand-green text-white rounded-2xl flex items-center justify-center font-black mx-auto mb-3 text-base shadow-md">RN</div>
-          <h4 class="font-black text-gray-900 text-base">José Rodrigo Naranjo[cite: 3]</h4>
-          <p class="text-xs text-brand-green font-bold mt-0.5">Líder del Proyecto & Web UI[cite: 1, 2, 3]</p>
-          <p class="text-xs text-gray-500 mt-2.5 leading-relaxed">Identidad de marca, arquitectura del sitio web, programación del backend con Apps Script y diagramación de la infografía[cite: 1, 2, 3].</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm text-center">
-          <div class="w-14 h-14 bg-blue-700 text-white rounded-2xl flex items-center justify-center font-black mx-auto mb-3 text-base shadow-md">EM</div>
-          <h4 class="font-black text-gray-900 text-base">Juan Esteban Montoya[cite: 3]</h4>
-          <p class="text-xs text-blue-700 font-bold mt-0.5">Investigación Teórica[cite: 1, 2, 3]</p>
-          <p class="text-xs text-gray-500 mt-2.5 leading-relaxed">Fundamentación diagnóstica, análisis de datos del DANE y Superservicios, redacción de introducción y justificación en APA 7[cite: 1, 2, 3].</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm text-center">
-          <div class="w-14 h-14 bg-purple-700 text-white rounded-2xl flex items-center justify-center font-black mx-auto mb-3 text-base shadow-md">ML</div>
-          <h4 class="font-black text-gray-900 text-base">Mariana Lucía Lozano[cite: 3]</h4>
-          <p class="text-xs text-purple-700 font-bold mt-0.5">Estrategia & Contenidos[cite: 1, 2, 3]</p>
-          <p class="text-xs text-gray-500 mt-2.5 leading-relaxed">Estructuración del protocolo doméstico L.S.C.E., curaduría del banco de imágenes y diseño de pautas para la seguridad del reciclador[cite: 1, 2, 3].</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-brand-dark text-zinc-400 py-10 border-t border-zinc-800 text-xs">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <i data-lucide="shield-check" class="w-4 h-4 text-brand-green"></i>
-        <span>Defensores del Reciclaje • Informática y Convergencia Tecnológica CUN[cite: 3]</span>
-      </div>
-      <p>© 2026. Campaña Digital Educativa y Social.</p>
+      </article>
     </div>
-  </footer>
 
-  <!-- MODAL LOGIN -->
-  <div id="loginModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-gray-100">
-      <div class="flex justify-between items-center mb-3">
-        <h3 class="font-black text-base text-gray-900 flex items-center gap-2">
-          <i data-lucide="lock" class="w-4 h-4 text-brand-green"></i> Acceso Administrativo
-        </h3>
-        <button onclick="cerrarAdminModal()" class="text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-4 h-4"></i></button>
-      </div>
-      <p class="text-xs text-gray-500 mb-3">Ingresa la clave para sincronizar modificaciones con Google Sheets.</p>
-      <input type="password" id="adminPassword" placeholder="Contraseña (cun2026)" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-green outline-none mb-3" />
-      <p id="loginError" class="text-xs text-red-600 font-semibold mb-3 hidden">Contraseña incorrecta.</p>
-      <div class="flex gap-2">
-        <button onclick="verificarPassword()" class="w-full bg-brand-green hover:bg-emerald-800 text-white font-bold py-2 rounded-xl text-xs transition-all">Ingresar</button>
-        <button onclick="cerrarAdminModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded-xl text-xs">Cancelar</button>
+    <!-- CTA secundario -->
+    <div class="mt-10 flex justify-center">
+      <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-gray-900 text-white text-[13px] font-bold shadow-lg">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+        Limpio + Seco + Compacto = Reciclaje que sí se aprovecha
       </div>
     </div>
   </div>
-
-  <!-- PANEL MODAL -->
-  <div id="panelModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-3xl p-6 max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-gray-100">
-      <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 sticky top-0 bg-white z-10">
-        <div>
-          <h3 class="font-black text-lg text-gray-900 flex items-center gap-2">
-            <i data-lucide="sliders" class="w-4 h-4 text-brand-green"></i> Gestión Global de Contenidos y Fotos
-          </h3>
-          <p class="text-xs text-gray-500">Actualiza textos, imágenes de fondo, galería y recursos en Google Sheets.</p>
-        </div>
-        <button onclick="cerrarPanel()" class="text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-4 h-4"></i></button>
-      </div>
-
-      <form id="adminForm" onsubmit="guardarCambios(event)" class="space-y-6 text-xs">
-        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-          <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green">
-            <i data-lucide="type" class="w-4 h-4"></i> Textos Principales
-          </h4>
-          <div class="space-y-3">
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Título Hero</label>
-              <input type="text" id="inputTitulo" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Eslogan</label>
-              <input type="text" id="inputEslogan" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Descripción Hero</label>
-              <textarea id="inputDescripcion" rows="2" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-          <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green">
-            <i data-lucide="image" class="w-4 h-4"></i> Fotografías Principales
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Fondo Hero (Banner Superior)</label>
-              <input type="url" id="inputHeroBgImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Imagen Sección Propuesta</label>
-              <input type="url" id="inputPropuestaImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-          <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green">
-            <i data-lucide="layers" class="w-4 h-4"></i> Fotos Método L.S.C.E. (4 Pasos)
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">1. Lavar (URL)</label>
-              <input type="url" id="inputMetodoLavarImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">2. Secar (URL)</label>
-              <input type="url" id="inputMetodoSecarImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">3. Compactar (URL)</label>
-              <input type="url" id="inputMetodoCompactarImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">4. Entregar (URL)</label>
-              <input type="url" id="inputMetodoEntregarImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-          <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green">
-            <i data-lucide="camera" class="w-4 h-4"></i> Fotos de la Galería (6 Tarjetas)
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Galería 1 (Punto Ecológico)</label>
-              <input type="url" id="inputGaleriaImg1" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Galería 2 (Plásticos PET)</label>
-              <input type="url" id="inputGaleriaImg2" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Galería 3 (Cartón Limpio)</label>
-              <input type="url" id="inputGaleriaImg3" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Galería 4 (Orgánicos)</label>
-              <input type="url" id="inputGaleriaImg4" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Galería 5 (Vidrio)</label>
-              <input type="url" id="inputGaleriaImg5" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">Galería 6 (Reciclador)</label>
-              <input type="url" id="inputGaleriaImg6" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-          <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green">
-            <i data-lucide="film" class="w-4 h-4"></i> Recursos Multimedia
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">URL Imagen Infografía</label>
-              <input type="url" id="inputInfografiaImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-            <div>
-              <label class="block font-semibold text-gray-700 mb-1">URL Video (YouTube Embed)</label>
-              <input type="url" id="inputVideoUrl" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required />
-            </div>
-          </div>
-        </div>
-
-        <div class="pt-3 border-t border-gray-100 flex items-center justify-end gap-2 sticky bottom-0 bg-white py-2">
-          <button type="button" onclick="cerrarPanel()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold">Cancelar</button>
-          <button type="submit" id="btnGuardar" class="px-5 py-2 bg-brand-green hover:bg-emerald-800 text-white rounded-xl font-bold shadow-md flex items-center gap-1.5">
-            <i data-lucide="cloud-upload" class="w-4 h-4"></i> Guardar Todo en Google Sheets
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- SCRIPT -->
-  <script>
-    lucide.createIcons();
-
-    const API_URL = "https://script.google.com/macros/s/AKfycbzEKtbMRZobEeDZc-ccLmhyCwS4JzUNriQvBTtrgNtaD_lxm1DSRYeMwwMUIBXuje1r/exec";
-
-    const DEFAULT_DATA = {
-      titulo: "Hogares Conscientes: Separar para Transformar",
-      eslogan: '"Limpio, seco y separado: el reciclaje empieza en casa."',
-      descripcion: "Más del 78% de los residuos generados en Colombia terminan sepultados en rellenos sanitarios. Nuestra campaña promueve la cultura de separación limpia en la cocina para dignificar la labor de los recicladores de oficio y avanzar hacia una economía circular real.",
-      heroBgImg: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1920&q=80",
-      propuestaImg: "https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=1000&q=80",
-      metodoLavarImg: "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=600&q=80",
-      metodoSecarImg: "https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?auto=format&fit=crop&w=600&q=80",
-      metodoCompactarImg: "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=600&q=80",
-      metodoEntregarImg: "https://images.unsplash.com/photo-1526951521990-620dc14c214b?auto=format&fit=crop&w=600&q=80",
-      galeriaImg1: "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?auto=format&fit=crop&w=800&q=80",
-      galeriaImg2: "https://images.unsplash.com/photo-1591193686104-fddba4d0e4d8?auto=format&fit=crop&w=800&q=80",
-      galeriaImg3: "https://images.unsplash.com/photo-1537084642907-629340c7e59c?auto=format&fit=crop&w=800&q=80",
-      galeriaImg4: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=800&q=80",
-      galeriaImg5: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80",
-      galeriaImg6: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80",
-      infografiaImg: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-    };
-
-    let datosActuales = { ...DEFAULT_DATA };
-    let passwordAutenticada = "";
-
-    function formatearUrlImagen(url, fallback) {
-      if (!url || typeof url !== "string" || url.trim() === "") return fallback;
-      url = url.trim();
-      if (url.includes("unsplash.com/es/fotos/") || url.includes("unsplash.com/photos/")) {
-        const clean = url.split("?")[0].replace(/\/$/, "");
-        const id = clean.split("-").pop();
-        if (id) {
-          return "https://images.unsplash.com/photo-" + id + "?auto=format&fit=crop&w=1000&q=80";
-        }
-      }
-      return url;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      aplicarContenidos(DEFAULT_DATA);
-      cargarDesdeGoogleSheets();
-    });
-
-    async function cargarDesdeGoogleSheets() {
-      const syncStatus = document.getElementById("sync-status");
-      try {
-        syncStatus.innerText = "Sincronizando...";
-        const res = await fetch(API_URL);
-        const data = await res.json();
-        
-        if (data && data.titulo) {
-          datosActuales = { ...DEFAULT_DATA, ...data };
-          aplicarContenidos(datosActuales);
-          syncStatus.innerText = "Sincronizado en Vivo";
-        }
-      } catch (error) {
-        console.warn("Aviso: usando datos locales:", error);
-        syncStatus.innerText = "Base de Datos Offline";
-      }
-    }
-
-    function aplicarContenidos(data) {
-      if (data.titulo) document.getElementById("dyn-titulo").innerText = data.titulo;
-      if (data.eslogan) document.getElementById("dyn-eslogan").innerText = data.eslogan;
-      if (data.descripcion) document.getElementById("dyn-descripcion").innerText = data.descripcion;
-
-      document.getElementById("dyn-hero-bg").src = formatearUrlImagen(data.heroBgImg, DEFAULT_DATA.heroBgImg);
-      document.getElementById("dyn-propuesta-img").src = formatearUrlImagen(data.propuestaImg, DEFAULT_DATA.propuestaImg);
-
-      document.getElementById("dyn-metodo-lavar").src = formatearUrlImagen(data.metodoLavarImg, DEFAULT_DATA.metodoLavarImg);
-      document.getElementById("dyn-metodo-secar").src = formatearUrlImagen(data.metodoSecarImg, DEFAULT_DATA.metodoSecarImg);
-      document.getElementById("dyn-metodo-compactar").src = formatearUrlImagen(data.metodoCompactarImg, DEFAULT_DATA.metodoCompactarImg);
-      document.getElementById("dyn-metodo-entregar").src = formatearUrlImagen(data.metodoEntregarImg, DEFAULT_DATA.metodoEntregarImg);
-
-      document.getElementById("dyn-galeria-1").src = formatearUrlImagen(data.galeriaImg1, DEFAULT_DATA.galeriaImg1);
-      document.getElementById("dyn-galeria-2").src = formatearUrlImagen(data.galeriaImg2, DEFAULT_DATA.galeriaImg2);
-      document.getElementById("dyn-galeria-3").src = formatearUrlImagen(data.galeriaImg3, DEFAULT_DATA.galeriaImg3);
-      document.getElementById("dyn-galeria-4").src = formatearUrlImagen(data.galeriaImg4, DEFAULT_DATA.galeriaImg4);
-      document.getElementById("dyn-galeria-5").src = formatearUrlImagen(data.galeriaImg5, DEFAULT_DATA.galeriaImg5);
-      document.getElementById("dyn-galeria-6").src = formatearUrlImagen(data.galeriaImg6, DEFAULT_DATA.galeriaImg6);
-
-      const infoImg = formatearUrlImagen(data.infografiaImg, DEFAULT_DATA.infografiaImg);
-      document.getElementById("dyn-infografia-img").src = infoImg;
-      document.getElementById("dyn-infografia-link").href = infoImg;
-
-      if (data.videoUrl) document.getElementById("dyn-video-iframe").src = data.videoUrl;
-    }
-
-    function toggleMobileMenu() {
-      document.getElementById("mobileMenu").classList.toggle("hidden");
-    }
-
-    function abrirAdminModal() {
-      document.getElementById("loginModal").classList.remove("hidden");
-      document.getElementById("loginModal").classList.add("flex");
-      document.getElementById("adminPassword").value = "";
-      document.getElementById("loginError").classList.add("hidden");
-    }
-
-    function cerrarAdminModal() {
-      document.getElementById("loginModal").classList.add("hidden");
-      document.getElementById("loginModal").classList.remove("flex");
-    }
-
-    function verificarPassword() {
-      const pass = document.getElementById("adminPassword").value;
-      if (pass.trim() !== "") {
-        passwordAutenticada = pass;
-        cerrarAdminModal();
-        abrirPanel();
-      } else {
-        document.getElementById("loginError").classList.remove("hidden");
-      }
-    }
-
-    function abrirPanel() {
-      document.getElementById("inputTitulo").value = datosActuales.titulo || "";
-      document.getElementById("inputEslogan").value = datosActuales.eslogan || "";
-      document.getElementById("inputDescripcion").value = datosActuales.descripcion || "";
-
-      document.getElementById("inputHeroBgImg").value = datosActuales.heroBgImg || "";
-      document.getElementById("inputPropuestaImg").value = datosActuales.propuestaImg || "";
-
-      document.getElementById("inputMetodoLavarImg").value = datosActuales.metodoLavarImg || "";
-      document.getElementById("inputMetodoSecarImg").value = datosActuales.metodoSecarImg || "";
-      document.getElementById("inputMetodoCompactarImg").value = datosActuales.metodoCompactarImg || "";
-      document.getElementById("inputMetodoEntregarImg").value = datosActuales.metodoEntregarImg || "";
-
-      document.getElementById("inputGaleriaImg1").value = datosActuales.galeriaImg1 || "";
-      document.getElementById("inputGaleriaImg2").value = datosActuales.galeriaImg2 || "";
-      document.getElementById("inputGaleriaImg3").value = datosActuales.galeriaImg3 || "";
-      document.getElementById("inputGaleriaImg4").value = datosActuales.galeriaImg4 || "";
-      document.getElementById("inputGaleriaImg5").value = datosActuales.galeriaImg5 || "";
-      document.getElementById("inputGaleriaImg6").value = datosActuales.galeriaImg6 || "";
-
-      document.getElementById("inputInfografiaImg").value = datosActuales.infografiaImg || "";
-      document.getElementById("inputVideoUrl").value = datosActuales.videoUrl || "";
-
-      document.getElementById("panelModal").classList.remove("hidden");
-      document.getElementById("panelModal").classList.add("flex");
-    }
-
-    function cerrarPanel() {
-      document.getElementById("panelModal").classList.add("hidden");
-      document.getElementById("panelModal").classList.remove("flex");
-    }
-
-    async function guardarCambios(e) {
-      e.preventDefault();
-      const btnGuardar = document.getElementById("btnGuardar");
-      const textoOriginal = btnGuardar.innerHTML;
-      btnGuardar.innerHTML = "Guardando...";
-      btnGuardar.disabled = true;
-
-      const payload = {
-        password: passwordAutenticada,
-        data: {
-          titulo: document.getElementById("inputTitulo").value,
-          eslogan: document.getElementById("inputEslogan").value,
-          descripcion: document.getElementById("inputDescripcion").value,
-          heroBgImg: document.getElementById("inputHeroBgImg").value,
-          propuestaImg: document.getElementById("inputPropuestaImg").value,
-          metodoLavarImg: document.getElementById("inputMetodoLavarImg").value,
-          metodoSecarImg: document.getElementById("inputMetodoSecarImg").value,
-          metodoCompactarImg: document.getElementById("inputMetodoCompactarImg").value,
-          metodoEntregarImg: document.getElementById("inputMetodoEntregarImg").value,
-          galeriaImg1: document.getElementById("inputGaleriaImg1").value,
-          galeriaImg2: document.getElementById("inputGaleriaImg2").value,
-          galeriaImg3: document.getElementById("inputGaleriaImg3").value,
-          galeriaImg4: document.getElementById("inputGaleriaImg4").value,
-          galeriaImg5: document.getElementById("inputGaleriaImg5").value,
-          galeriaImg6: document.getElementById("inputGaleriaImg6").value,
-          infografiaImg: document.getElementById("inputInfografiaImg").value,
-          videoUrl: document.getElementById("inputVideoUrl").value
-        }
-      };
-
-      try {
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(payload)
-        });
-
-        const resp = await res.json();
-
-        if (resp.status === "success") {
-          datosActuales = { ...payload.data };
-          aplicarContenidos(datosActuales);
-          cerrarPanel();
-          alert("¡Todas las fotos y textos se actualizaron en Google Sheets con éxito!");
-        } else {
-          alert("Error: " + (resp.message || "Contraseña incorrecta"));
-        }
-      } catch (err) {
-        alert("Fallo de comunicación: " + err.message);
-      } finally {
-        btnGuardar.innerHTML = textoOriginal;
-        btnGuardar.disabled = false;
-        lucide.createIcons();
-      }
-    }
-  </script>
+</section>
+ <!-- GALERÍA DE CASOS REALES --> <section id="galeria" class="py-16 bg-gray-100/80 border-t border-gray-200"> <div class="max-w-6xl mx-auto px-4 sm:px-6"> <div class="text-center max-w-xl mx-auto mb-12"> <span class="text-brand-green font-bold text-xs uppercase tracking-widest">Evidencia y Rutina</span> <h2 class="text-3xl font-black text-brand-dark tracking-tight mt-1">Galería de la Campaña</h2> <p class="text-gray-600 text-sm mt-2">La separación en la fuente observada desde el lente pedagógico.</p> </div> <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"> <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group"> <div class="h-48 overflow-hidden bg-gray-100"> <img id="dyn-galeria-1" src="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?auto=format&fit=crop&w=800&q=80" alt="Separación organizada" class="img-zoom w-full h-full object-cover" /> </div> <div class="p-4"> <p class="text-xs font-bold text-gray-900">Punto Ecológico en la Cocina</p> <p class="text-[11px] text-gray-500 mt-0.5">Disponer bolsas diferenciadas disminuye en un 80% los errores al desechar.</p> </div> </div> <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group"> <div class="h-48 overflow-hidden bg-gray-100"> <img id="dyn-galeria-2" src="https://images.unsplash.com/photo-1591193686104-fddba4d0e4d8?auto=format&fit=crop&w=800&q=80" alt="Reciclaje de botellas" class="img-zoom w-full h-full object-cover" /> </div> <div class="p-4"> <p class="text-xs font-bold text-gray-900">Plásticos PET Clasificados</p> <p class="text-[11px] text-gray-500 mt-0.5">Envases limpios y secos que ingresan de inmediato a las plantas de transformación.</p> </div> </div> <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group"> <div class="h-48 overflow-hidden bg-gray-100"> <img id="dyn-galeria-3" src="https://images.unsplash.com/photo-1537084642907-629340c7e59c?auto=format&fit=crop&w=800&q=80" alt="Reciclaje de cartón" class="img-zoom w-full h-full object-cover" /> </div> <div class="p-4"> <p class="text-xs font-bold text-gray-900">Cartón y Papel Libre de Grasa</p> <p class="text-[11px] text-gray-500 mt-0.5">Mantenerlos libres de humedad y restos de salsas asegura su aprovechamiento.</p> </div> </div> <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group"> <div class="h-48 overflow-hidden bg-gray-100"> <img id="dyn-galeria-4" src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=800&q=80" alt="Residuos de compost" class="img-zoom w-full h-full object-cover" /> </div> <div class="p-4"> <p class="text-xs font-bold text-gray-900">Aprovechamiento Orgánico</p> <p class="text-[11px] text-gray-500 mt-0.5">Cáscaras de frutas y café que retornan al suelo enriqueciendo cultivos y jardines.</p> </div> </div> <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group"> <div class="h-48 overflow-hidden bg-gray-100"> <img id="dyn-galeria-5" src="https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80" alt="Vidrio limpio" class="img-zoom w-full h-full object-cover" /> </div> <div class="p-4"> <p class="text-xs font-bold text-gray-900">Frascos de Vidrio Aptos</p> <p class="text-[11px] text-gray-500 mt-0.5">Un material 100% reciclable de forma infinita si se entrega entero y sin roturas.</p> </div> </div> <div class="img-card bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200 group"> <div class="h-48 overflow-hidden bg-gray-100"> <img id="dyn-galeria-6" src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="Economía circular comunitaria" class="img-zoom w-full h-full object-cover" /> </div> <div class="p-4"> <p class="text-xs font-bold text-gray-900">La Fuerza del Reciclador</p> <p class="text-[11px] text-gray-500 mt-0.5">La ruta selectiva urbana es el verdadero corazón de la economía circular del país.</p> </div> </div> </div> </div> </section> <!-- INFOGRAFÍA --> <section id="infografia" class="py-16 max-w-5xl mx-auto px-4 sm:px-6 text-center"> <div class="max-w-xl mx-auto mb-10"> <span class="text-brand-green font-bold text-xs uppercase tracking-widest">Recurso Oficial Descargable</span> <h2 class="text-3xl font-black text-brand-dark tracking-tight mt-1">Infografía de la Campaña</h2> <p class="text-gray-600 text-sm mt-2">Material vertical elaborado por el equipo con el semáforo y protocolo L.S.C.E.</p> </div> <div class="bg-white p-4 sm:p-7 rounded-3xl border border-gray-200 shadow-md max-w-md mx-auto"> <img id="dyn-infografia-img" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80" alt="Infografía Tu Hogar en Modo Circular" class="w-full h-auto rounded-2xl shadow border border-gray-100 object-contain mx-auto" /> <div class="mt-5 flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-gray-100"> <span class="text-xs text-gray-500 italic font-medium">Diseñada por Rodrigo Naranjo</span> <a id="dyn-infografia-link" href="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80" target="_blank" class="inline-flex items-center gap-1.5 bg-brand-green hover:bg-emerald-800 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm"> <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Ver en Alta Resolución </a> </div> </div> </section> <!-- VIDEO --> <section id="video" class="py-16 bg-brand-dark text-white"> <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center"> <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest">Sustentación del Equipo</span> <h2 class="text-3xl font-black text-white tracking-tight mt-1">Video Demostrativo del Proyecto</h2> <p class="text-zinc-400 text-xs sm:text-sm mt-2 max-w-lg mx-auto"> Exposición académica de 3 a 10 minutos con la participación de Rodrigo Naranjo, Juan Esteban Montoya y Mariana Lucía Lozano. </p> <div class="mt-8 relative aspect-video bg-black rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl"> <iframe id="dyn-video-iframe" class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video de la Campaña" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </div> </div> </section> <!-- EQUIPO --> <section id="equipo" class="py-16 max-w-5xl mx-auto px-4 sm:px-6"> <div class="text-center max-w-xl mx-auto mb-12"> <h2 class="text-3xl font-black text-brand-dark tracking-tight">Equipo Desarrollador</h2> <p class="text-gray-600 text-sm mt-1">Corporación Unificada Nacional de Educación Superior (CUN) • Ficha 54424</p> </div> <div class="grid grid-cols-1 md:grid-cols-3 gap-6"> <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm text-center"> <div class="w-14 h-14 bg-brand-green text-white rounded-2xl flex items-center justify-center font-black mx-auto mb-3 text-base shadow-md">RN</div> <h4 class="font-black text-gray-900 text-base">José Rodrigo Naranjo</h4> <p class="text-xs text-brand-green font-bold mt-0.5">Líder del Proyecto & Web UI</p> <p class="text-xs text-gray-500 mt-2.5 leading-relaxed">Identidad de marca, arquitectura del sitio web, programación del backend con Apps Script y diagramación de la infografía.</p> </div> <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm text-center"> <div class="w-14 h-14 bg-blue-700 text-white rounded-2xl flex items-center justify-center font-black mx-auto mb-3 text-base shadow-md">EM</div> <h4 class="font-black text-gray-900 text-base">Juan Esteban Montoya</h4> <p class="text-xs text-blue-700 font-bold mt-0.5">Investigación Teórica</p> <p class="text-xs text-gray-500 mt-2.5 leading-relaxed">Fundamentación diagnóstica, análisis de datos del DANE y Superservicios, redacción de introducción y justificación en APA 7.</p> </div> <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm text-center"> <div class="w-14 h-14 bg-purple-700 text-white rounded-2xl flex items-center justify-center font-black mx-auto mb-3 text-base shadow-md">ML</div> <h4 class="font-black text-gray-900 text-base">Mariana Lucía Lozano</h4> <p class="text-xs text-purple-700 font-bold mt-0.5">Estrategia & Contenidos</p> <p class="text-xs text-gray-500 mt-2.5 leading-relaxed">Estructuración del protocolo doméstico L.S.C.E., curaduría del banco de imágenes y diseño de pautas para la seguridad del reciclador.</p> </div> </div> </section> </main> <footer class="bg-brand-dark text-zinc-400 py-10 border-t border-zinc-800 text-xs"> <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4"> <div class="flex items-center gap-2"> <i data-lucide="shield-check" class="w-4 h-4 text-brand-green"></i> <span>Defensores del Reciclaje • Informática y Convergencia Tecnológica CUN</span> </div> <p>© 2026. Campaña Digital Educativa y Social.</p> </div> </footer> <!-- MODAL LOGIN --> <div id="loginModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4"> <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-gray-100"> <div class="flex justify-between items-center mb-3"> <h3 class="font-black text-base text-gray-900 flex items-center gap-2"> <i data-lucide="lock" class="w-4 h-4 text-brand-green"></i> Acceso Administrativo </h3> <button onclick="cerrarAdminModal()" class="text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-4 h-4"></i></button> </div> <p class="text-xs text-gray-500 mb-3">Ingresa la clave para sincronizar modificaciones con Google Sheets.</p> <input type="password" id="adminPassword" placeholder="Contraseña (cun2026)" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-green outline-none mb-3" /> <p id="loginError" class="text-xs text-red-600 font-semibold mb-3 hidden">Contraseña incorrecta.</p> <div class="flex gap-2"> <button onclick="verificarPassword()" class="w-full bg-brand-green hover:bg-emerald-800 text-white font-bold py-2 rounded-xl text-xs transition-all">Ingresar</button> <button onclick="cerrarAdminModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded-xl text-xs">Cancelar</button> </div> </div> </div> <!-- PANEL MODAL --> <div id="panelModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4"> <div class="bg-white rounded-3xl p-6 max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-gray-100"> <div class="flex justify-between items-center pb-3 border-b border-gray-100 mb-4 sticky top-0 bg-white z-10"> <div> <h3 class="font-black text-lg text-gray-900 flex items-center gap-2"> <i data-lucide="sliders" class="w-4 h-4 text-brand-green"></i> Gestión Global de Contenidos y Fotos </h3> <p class="text-xs text-gray-500">Actualiza textos, imágenes de fondo, galería y recursos en Google Sheets.</p> </div> <button onclick="cerrarPanel()" class="text-gray-400 hover:text-gray-600"><i data-lucide="x" class="w-4 h-4"></i></button> </div> <form id="adminForm" onsubmit="guardarCambios(event)" class="space-y-6 text-xs"> <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200"> <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green"> <i data-lucide="type" class="w-4 h-4"></i> Textos Principales </h4> <div class="space-y-3"> <div> <label class="block font-semibold text-gray-700 mb-1">Título Hero</label> <input type="text" id="inputTitulo" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">Eslogan</label> <input type="text" id="inputEslogan" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">Descripción Hero</label> <textarea id="inputDescripcion" rows="2" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required></textarea> </div> </div> </div> <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200"> <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green"> <i data-lucide="image" class="w-4 h-4"></i> Fotografías Principales </h4> <div class="grid grid-cols-1 sm:grid-cols-2 gap-3"> <div> <label class="block font-semibold text-gray-700 mb-1">Fondo Hero (Banner Superior)</label> <input type="url" id="inputHeroBgImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">Imagen Sección Propuesta</label> <input type="url" id="inputPropuestaImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> </div> </div> <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200"> <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green"> <i data-lucide="layers" class="w-4 h-4"></i> Fotos Método L.S.C.E. (4 Pasos) </h4> <div class="grid grid-cols-1 sm:grid-cols-2 gap-3"> <div> <label class="block font-semibold text-gray-700 mb-1">1. Lavar (URL)</label> <input type="url" id="inputMetodoLavarImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">2. Secar (URL)</label> <input type="url" id="inputMetodoSecarImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">3. Compactar (URL)</label> <input type="url" id="inputMetodoCompactarImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">4. Entregar (URL)</label> <input type="url" id="inputMetodoEntregarImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> </div> </div> <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200"> <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green"> <i data-lucide="camera" class="w-4 h-4"></i> Fotos de la Galería (6 Tarjetas) </h4> <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3"> <div> <label class="block font-semibold text-gray-700 mb-1">Galería 1 (Punto Ecológico)</label> <input type="url" id="inputGaleriaImg1" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">Galería 2 (Plásticos PET)</label> <input type="url" id="inputGaleriaImg2" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">Galería 3 (Cartón Limpio)</label> <input type="url" id="inputGaleriaImg3" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">Galería 4 (Orgánicos)</label> <input type="url" id="inputGaleriaImg4" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">Galería 5 (Vidrio)</label> <input type="url" id="inputGaleriaImg5" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">Galería 6 (Reciclador)</label> <input type="url" id="inputGaleriaImg6" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> </div> </div> <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200"> <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-1.5 text-brand-green"> <i data-lucide="film" class="w-4 h-4"></i> Recursos Multimedia </h4> <div class="grid grid-cols-1 sm:grid-cols-2 gap-3"> <div> <label class="block font-semibold text-gray-700 mb-1">URL Imagen Infografía</label> <input type="url" id="inputInfografiaImg" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> <div> <label class="block font-semibold text-gray-700 mb-1">URL Video (YouTube Embed)</label> <input type="url" id="inputVideoUrl" class="w-full px-3 py-2 border rounded-xl bg-white focus:ring-2 focus:ring-brand-green outline-none" required /> </div> </div> </div> <div class="pt-3 border-t border-gray-100 flex items-center justify-end gap-2 sticky bottom-0 bg-white py-2"> <button type="button" onclick="cerrarPanel()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold">Cancelar</button> <button type="submit" id="btnGuardar" class="px-5 py-2 bg-brand-green hover:bg-emerald-800 text-white rounded-xl font-bold shadow-md flex items-center gap-1.5"> <i data-lucide="cloud-upload" class="w-4 h-4"></i> Guardar Todo en Google Sheets </button> </div> </form> </div> </div> <!-- SCRIPT --> <script> lucide.createIcons(); const API_URL = "https://script.google.com/macros/s/AKfycbzEKtbMRZobEeDZc-ccLmhyCwS4JzUNriQvBTtrgNtaD_lxm1DSRYeMwwMUIBXuje1r/exec"; const DEFAULT_DATA = { titulo: "Hogares Conscientes: Separar para Transformar", eslogan: '"Limpio, seco y separado: el reciclaje empieza en casa."', descripcion: "Más del 78% de los residuos generados en Colombia terminan sepultados en rellenos sanitarios. Nuestra campaña promueve la cultura de separación limpia en la cocina para dignificar la labor de los recicladores de oficio y avanzar hacia una economía circular real.", heroBgImg: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1920&q=80", propuestaImg: "https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=1000&q=80", metodoLavarImg: "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=600&q=80", metodoSecarImg: "https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?auto=format&fit=crop&w=600&q=80", metodoCompactarImg: "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=600&q=80", metodoEntregarImg: "https://images.unsplash.com/photo-1526951521990-620dc14c214b?auto=format&fit=crop&w=600&q=80", galeriaImg1: "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?auto=format&fit=crop&w=800&q=80", galeriaImg2: "https://images.unsplash.com/photo-1591193686104-fddba4d0e4d8?auto=format&fit=crop&w=800&q=80", galeriaImg3: "https://images.unsplash.com/photo-1537084642907-629340c7e59c?auto=format&fit=crop&w=800&q=80", galeriaImg4: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=800&q=80", galeriaImg5: "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80", galeriaImg6: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80", infografiaImg: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1000&q=80", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" }; let datosActuales = { ...DEFAULT_DATA }; let passwordAutenticada = ""; function formatearUrlImagen(url, fallback) { if (!url || typeof url !== "string" || url.trim() === "") return fallback; url = url.trim(); if (url.includes("unsplash.com/es/fotos/") || url.includes("unsplash.com/photos/")) { const clean = url.split("?")[0].replace(/\/$/, ""); const id = clean.split("-").pop(); if (id) { return "https://images.unsplash.com/photo-" + id + "?auto=format&fit=crop&w=1000&q=80"; } } return url; } document.addEventListener("DOMContentLoaded", () => { aplicarContenidos(DEFAULT_DATA); cargarDesdeGoogleSheets(); }); async function cargarDesdeGoogleSheets() { const syncStatus = document.getElementById("sync-status"); try { syncStatus.innerText = "Sincronizando..."; const res = await fetch(API_URL); const data = await res.json(); if (data && data.titulo) { datosActuales = { ...DEFAULT_DATA, ...data }; aplicarContenidos(datosActuales); syncStatus.innerText = "Sincronizado en Vivo"; } } catch (error) { console.warn("Aviso: usando datos locales:", error); syncStatus.innerText = "Base de Datos Offline"; } } function aplicarContenidos(data) { if (data.titulo) document.getElementById("dyn-titulo").innerText = data.titulo; if (data.eslogan) document.getElementById("dyn-eslogan").innerText = data.eslogan; if (data.descripcion) document.getElementById("dyn-descripcion").innerText = data.descripcion; document.getElementById("dyn-hero-bg").src = formatearUrlImagen(data.heroBgImg, DEFAULT_DATA.heroBgImg); document.getElementById("dyn-propuesta-img").src = formatearUrlImagen(data.propuestaImg, DEFAULT_DATA.propuestaImg); document.getElementById("dyn-metodo-lavar").src = formatearUrlImagen(data.metodoLavarImg, DEFAULT_DATA.metodoLavarImg); document.getElementById("dyn-metodo-secar").src = formatearUrlImagen(data.metodoSecarImg, DEFAULT_DATA.metodoSecarImg); document.getElementById("dyn-metodo-compactar").src = formatearUrlImagen(data.metodoCompactarImg, DEFAULT_DATA.metodoCompactarImg); document.getElementById("dyn-metodo-entregar").src = formatearUrlImagen(data.metodoEntregarImg, DEFAULT_DATA.metodoEntregarImg); document.getElementById("dyn-galeria-1").src = formatearUrlImagen(data.galeriaImg1, DEFAULT_DATA.galeriaImg1); document.getElementById("dyn-galeria-2").src = formatearUrlImagen(data.galeriaImg2, DEFAULT_DATA.galeriaImg2); document.getElementById("dyn-galeria-3").src = formatearUrlImagen(data.galeriaImg3, DEFAULT_DATA.galeriaImg3); document.getElementById("dyn-galeria-4").src = formatearUrlImagen(data.galeriaImg4, DEFAULT_DATA.galeriaImg4); document.getElementById("dyn-galeria-5").src = formatearUrlImagen(data.galeriaImg5, DEFAULT_DATA.galeriaImg5); document.getElementById("dyn-galeria-6").src = formatearUrlImagen(data.galeriaImg6, DEFAULT_DATA.galeriaImg6); const infoImg = formatearUrlImagen(data.infografiaImg, DEFAULT_DATA.infografiaImg); document.getElementById("dyn-infografia-img").src = infoImg; document.getElementById("dyn-infografia-link").href = infoImg; if (data.videoUrl) document.getElementById("dyn-video-iframe").src = data.videoUrl; } function toggleMobileMenu() { document.getElementById("mobileMenu").classList.toggle("hidden"); } function abrirAdminModal() { document.getElementById("loginModal").classList.remove("hidden"); document.getElementById("loginModal").classList.add("flex"); document.getElementById("adminPassword").value = ""; document.getElementById("loginError").classList.add("hidden"); } function cerrarAdminModal() { document.getElementById("loginModal").classList.add("hidden"); document.getElementById("loginModal").classList.remove("flex"); } function verificarPassword() { const pass = document.getElementById("adminPassword").value; if (pass.trim() !== "") { passwordAutenticada = pass; cerrarAdminModal(); abrirPanel(); } else { document.getElementById("loginError").classList.remove("hidden"); } } function abrirPanel() { document.getElementById("inputTitulo").value = datosActuales.titulo || ""; document.getElementById("inputEslogan").value = datosActuales.eslogan || ""; document.getElementById("inputDescripcion").value = datosActuales.descripcion || ""; document.getElementById("inputHeroBgImg").value = datosActuales.heroBgImg || ""; document.getElementById("inputPropuestaImg").value = datosActuales.propuestaImg || ""; document.getElementById("inputMetodoLavarImg").value = datosActuales.metodoLavarImg || ""; document.getElementById("inputMetodoSecarImg").value = datosActuales.metodoSecarImg || ""; document.getElementById("inputMetodoCompactarImg").value = datosActuales.metodoCompactarImg || ""; document.getElementById("inputMetodoEntregarImg").value = datosActuales.metodoEntregarImg || ""; document.getElementById("inputGaleriaImg1").value = datosActuales.galeriaImg1 || ""; document.getElementById("inputGaleriaImg2").value = datosActuales.galeriaImg2 || ""; document.getElementById("inputGaleriaImg3").value = datosActuales.galeriaImg3 || ""; document.getElementById("inputGaleriaImg4").value = datosActuales.galeriaImg4 || ""; document.getElementById("inputGaleriaImg5").value = datosActuales.galeriaImg5 || ""; document.getElementById("inputGaleriaImg6").value = datosActuales.galeriaImg6 || ""; document.getElementById("inputInfografiaImg").value = datosActuales.infografiaImg || ""; document.getElementById("inputVideoUrl").value = datosActuales.videoUrl || ""; document.getElementById("panelModal").classList.remove("hidden"); document.getElementById("panelModal").classList.add("flex"); } function cerrarPanel() { document.getElementById("panelModal").classList.add("hidden"); document.getElementById("panelModal").classList.remove("flex"); } async function guardarCambios(e) { e.preventDefault(); const btnGuardar = document.getElementById("btnGuardar"); const textoOriginal = btnGuardar.innerHTML; btnGuardar.innerHTML = "Guardando..."; btnGuardar.disabled = true; const payload = { password: passwordAutenticada, data: { titulo: document.getElementById("inputTitulo").value, eslogan: document.getElementById("inputEslogan").value, descripcion: document.getElementById("inputDescripcion").value, heroBgImg: document.getElementById("inputHeroBgImg").value, propuestaImg: document.getElementById("inputPropuestaImg").value, metodoLavarImg: document.getElementById("inputMetodoLavarImg").value, metodoSecarImg: document.getElementById("inputMetodoSecarImg").value, metodoCompactarImg: document.getElementById("inputMetodoCompactarImg").value, metodoEntregarImg: document.getElementById("inputMetodoEntregarImg").value, galeriaImg1: document.getElementById("inputGaleriaImg1").value, galeriaImg2: document.getElementById("inputGaleriaImg2").value, galeriaImg3: document.getElementById("inputGaleriaImg3").value, galeriaImg4: document.getElementById("inputGaleriaImg4").value, galeriaImg5: document.getElementById("inputGaleriaImg5").value, galeriaImg6: document.getElementById("inputGaleriaImg6").value, infografiaImg: document.getElementById("inputInfografiaImg").value, videoUrl: document.getElementById("inputVideoUrl").value } }; try { const res = await fetch(API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) }); const resp = await res.json(); if (resp.status === "success") { datosActuales = { ...payload.data }; aplicarContenidos(datosActuales); cerrarPanel(); alert("¡Todas las fotos y textos se actualizaron en Google Sheets con éxito!"); } else { alert("Error: " + (resp.message || "Contraseña incorrecta")); } } catch (err) { alert("Fallo de comunicación: " + err.message); } finally { btnGuardar.innerHTML = textoOriginal; btnGuardar.disabled = false; lucide.createIcons(); } } </script>
 </body>
 </html>
